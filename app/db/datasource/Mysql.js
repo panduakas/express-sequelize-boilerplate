@@ -18,6 +18,7 @@ db.development = {
   logging: false,
   timezone: '+07:00',
 };
+
 db.production = {
   use_env_variable: process.env.DB_CUSTOM_PROD,
   dialect: process.env.DB_DIALECT,

@@ -4,6 +4,7 @@ const toNumber = require('lodash/toNumber');
 const isNull = require('lodash/isNull');
 const get = require('lodash/get');
 const { logger, httpStatus } = require('../libs');
+// const { AESEncrypt } = require('../libs');
 
 const successResponse = (req, data) => {
   const { requestId, method } = req;

@@ -5,7 +5,8 @@
   "main": ".eslintrc.js",
   "scripts": {
     "start": "node ./app/server.js",
-    "start-dev": "./node_modules/.bin/nodemon ./app/server.js"
+    "start-dev": "./node_modules/.bin/nodemon ./app/server.js",
+    "run-test": "./node_modules/mocha/bin/mocha --exit --reporter spec --timeout 12000 --require ./app/server.js test/*.js"
   },
   "keywords": [
     "express"
