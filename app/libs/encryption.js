@@ -2,7 +2,7 @@ const CryptoJS = require('crypto-js');
 
 const configSecurity = {
   mode: CryptoJS.mode.ECB,
-  padding: CryptoJS.pad.Pkcs7,
+  padding: CryptoJS.pad.AnsiX923,
 };
 const keyPromise = CryptoJS.enc.Utf8.parse(process.env.ENCRYPT_KEY);
 

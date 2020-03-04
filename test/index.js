@@ -20,6 +20,8 @@ before((done) => {
 });
 
 require('./ping.test')(server, assert, dataTest, sequelize, AESDecrypt);
+require('./libs/encryption.test')(server, assert);
+
 
 after((done) => {
   // TODO: Delete Seed Data

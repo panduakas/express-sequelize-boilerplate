@@ -6,10 +6,18 @@
   "scripts": {
     "start": "node ./app/server.js",
     "start-dev": "./node_modules/.bin/nodemon ./app/server.js",
-    "run-test": "./node_modules/mocha/bin/mocha --exit --reporter spec --timeout 12000 --require ./app/server.js test/*.js"
+    "test": "./node_modules/mocha/bin/mocha --exit --reporter spec --timeout 12000 --require ./app/server.js test/*.js",
+    "create-db": "node_modules/.bin/sequelize db:create --config=app/db/datasource/Mysql.js",
+    "migrate": "node_modules/.bin/sequelize db:migrate --migrations-path=app/db/migrations --config=app/db/datasource/Mysql.js",
+    "seed": "./node_modules/.bin/sequelize db:seed:all --seeders-path=app/db/seeds --config=app/db/datasource/Mysql.js",
+    "eslint-fix": "./node_modules/.bin/eslint --fix ."
   },
   "keywords": [
     "express"
+  ],
+  "pre-commit": [
+    "eslint-fix",
+    "test"
   ],
   "repository": {
     "type": "git",
