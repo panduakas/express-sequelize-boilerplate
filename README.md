@@ -53,6 +53,6 @@ Getting up and running is as easy as 1, 2, 3.
 
 ## License
 
-This code is made wholeheartedly and contains the art of writing code. I know that this code still has many shortcomings and I haven't been able to finish it because of the limited time on workdays. For all its shortcomings I plead with sincerity.
+This code is made wholeheartedly and contains the art of writing code.
 
 Copyright (c) 2020 panduakas
