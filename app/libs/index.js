@@ -1,11 +1,5 @@
-const logger = require('./logger');
-const { httpStatus } = require('./codes');
-const { AESDecrypt, AESEncrypt, Base64 } = require('./encryption');
+const encrypt = require('./encryption');
 
 module.exports = {
-  logger,
-  httpStatus,
-  AESDecrypt,
-  AESEncrypt,
-  Base64,
+  ...encrypt,
 };

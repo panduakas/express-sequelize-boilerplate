@@ -1,6 +1,5 @@
 const cuid = require('cuid');
-const { httpStatus } = require('../libs');
-const { errorResponse } = require('../helpers');
+const { errorResponse, httpStatus } = require('../helpers');
 
 const notFound = (req, res) => {
   res.status(httpStatus.notFound).json({

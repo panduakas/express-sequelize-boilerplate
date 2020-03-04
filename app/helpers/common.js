@@ -1,9 +1,11 @@
+/* eslint-disable no-param-reassign */
 
 const isNumber = require('lodash/isNumber');
 const toNumber = require('lodash/toNumber');
 const isNull = require('lodash/isNull');
 const get = require('lodash/get');
-const { logger, httpStatus } = require('../libs');
+const { logInfo, logError } = require('./logger');
+const { httpStatus } = require('./codes');
 // const { AESEncrypt } = require('../libs');
 
 const successResponse = (req, data) => {
@@ -15,7 +17,7 @@ const successResponse = (req, data) => {
     data: get(data, 'data') || data,
   };
 
-  logger.info({
+  logInfo({
     requestId,
     data: payload.data,
     method,
@@ -36,7 +38,7 @@ const errorResponse = (req, e) => {
     data: get(e, 'data') || null,
   };
 
-  logger.info({
+  logError({
     requestId,
     data: payload.data,
     method,
@@ -49,15 +51,9 @@ const errorResponse = (req, e) => {
 };
 
 const paging = (page = 1, limit = 10) => {
-  if (page === 0 || isNull(page)) {
-    // eslint-disable-next-line no-param-reassign
-    page = 1;
-  }
+  if (page === 0 || isNull(page)) page = 1;
 
-  if (isNull(limit)) {
-    // eslint-disable-next-line no-param-reassign
-    limit = 10;
-  }
+  if (isNull(limit)) limit = 10;
 
   const getPage = isNumber(page) ? page : toNumber(page);
   const getLimit = isNumber(limit) ? limit : toNumber(limit);

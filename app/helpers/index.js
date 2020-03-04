@@ -1,14 +1,11 @@
-const {
-  errorResponse,
-  successResponse,
-  paging,
-} = require('./common');
+const common = require('./common');
+const codes = require('./codes');
+const logger = require('./logger');
 const wrap = require('./wrap');
 
-
 module.exports = {
-  errorResponse,
-  successResponse,
-  paging,
+  ...common,
+  ...codes,
+  ...logger,
   wrap,
 };

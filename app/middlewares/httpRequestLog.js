@@ -1,4 +1,4 @@
-const logger = require('../libs/logger');
+const { logInfo } = require('../helpers');
 
 const requestLog = (req, res, next) => {
   const {
@@ -21,7 +21,7 @@ const requestLog = (req, res, next) => {
   if (Object.entries(params).length === 0 && params.constructor === Object) delete data.params;
   if (Object.entries(body).length === 0 && body.constructor === Object) delete data.body;
 
-  logger.info({
+  logInfo({
     requestId,
     data,
     method,

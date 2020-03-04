@@ -1,6 +1,6 @@
 const get = require('lodash/get');
 const { successResponse, errorResponse } = require('./common');
-const { httpStatus } = require('../libs');
+const { httpStatus } = require('./codes');
 
 module.exports = fn => (req, res) => fn(req, res)
   .then(response => res

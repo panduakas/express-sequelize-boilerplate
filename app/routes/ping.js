@@ -9,18 +9,32 @@ const { wrap } = require('../helpers');
  *     produces:
  *       - application/json
  *     responses:
- *       202:
- *         description: Accepted
+ *       200:
+ *         description: Success
  */
 
 const ping = async () => {
   /**
-   * const result = {
+   *  throwing error example:
+   *
+   *  throw new Error('hello');
+   *
+   *
+   *
+   *  custom error example:
+   *
+   *  throw Object.assign(new Error('hello'), { code: 401, data: ['hai', 'kamu'] });
+   *
+   *
+   *
+   *  custom statusCode and message example:
+   *
+   *  const result = {
        status: 202,
        message: 'Pong!',
        data: ['Hello', 'World'],
      };
-  *//* this for custom statusCode and message */
+  */
   const result = ['Hello', 'World'];
   return result;
 };
