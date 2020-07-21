@@ -23,7 +23,7 @@ const ping = async () => {
    *
    *  custom error example:
    *
-   *  throw Object.assign(new Error('hello'), { code: 401, data: ['hai', 'kamu'] });
+   *  throw Object.assign(new Error('hello'), { status: 401, data: ['hai', 'kamu'] });
    *
    *
    *
