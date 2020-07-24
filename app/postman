@@ -38,7 +38,6 @@ components:
         - message
       properties:
         status:
-          type: integer
-          format: int32
+          type: string
         message:
           type: string
