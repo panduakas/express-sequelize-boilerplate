@@ -12,7 +12,9 @@ const notFound = (req, res) => {
 
 const reqId = (req, res, next) => {
   req.requestId = cuid();
+  process.requestId = req.requestId;
   next();
+  return req.requestId;
 };
 
 const errorHandler = (err, req, res) => errorResponse(res, err);

@@ -1,7 +1,7 @@
 {
-  "name": "express-sequelize-boilerplate",
+  "name": "core-mpng3",
   "version": "1.0.0",
-  "description": "Express Sequelize Boilerplate",
+  "description": "Core services mpng3",
   "main": ".eslintrc.js",
   "scripts": {
     "start": "node ./app/server.js",
@@ -21,11 +21,11 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/panduakas/express-sequelize-boilerplate.git"
+    "url": "git+ssh://git@bitbucket.org/BersamaZipay/core-mpng3.git"
   },
-  "author": "panduakas",
-  "license": "ISC",
   "dependencies": {
+    "axios": "^0.19.2",
+    "axios-retry": "^3.1.8",
     "basic-auth": "^2.0.1",
     "bcrypt": "^3.0.7",
     "body-parser": "^1.19.0",
@@ -55,12 +55,14 @@
     "passport": "^0.4.0",
     "passport-jwt": "^4.0.0",
     "passport-local": "^1.0.0",
+    "retry-axios": "^2.2.1",
     "sequelize": "^5.9.4",
     "sequelize-cli": "^5.5.0",
     "swagger-jsdoc": "^3.2.3",
     "swagger-ui-express": "^4.0.1",
     "winston": "^2.4.1",
     "winston-daily-rotate-file": "^3.4.1",
+    "winston-logstash": "^0.4.0",
     "xss-clean": "^0.1.1"
   },
   "devDependencies": {
@@ -82,8 +84,7 @@
     "stylelint": "^9.10.1",
     "supertest": "^3.4.2"
   },
-  "bugs": {
-    "url": "https://github.com/panduakas/express-sequelize-boilerplate/issues"
-  },
-  "homepage": "https://github.com/panduakas/express-sequelize-boilerplate#readme"
+  "author": "",
+  "license": "ISC",
+  "homepage": "https://bitbucket.org/BersamaZipay/core-mpng3#readme"
 }

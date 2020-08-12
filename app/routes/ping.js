@@ -1,4 +1,5 @@
 const { wrap } = require('../helpers');
+const { timeOut } = require('../action');
 
 /**
  * @swagger
@@ -39,6 +40,12 @@ const ping = async () => {
   return result;
 };
 
+const delayApi = async () => {
+  await timeOut(121000);
+  throw new Error('TIMEOUT');
+};
+
 module.exports = (router) => {
   router.get('/', wrap(ping));
+  router.get('/delay', wrap(delayApi));
 };

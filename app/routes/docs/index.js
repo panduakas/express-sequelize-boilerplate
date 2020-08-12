@@ -1,18 +1,6 @@
 const swaggerJSDoc = require('swagger-jsdoc');
 const swaggerUi = require('swagger-ui-express');
-const basicAuthModule = require('basic-auth');
-
-function basicAuth() {
-  return (req, res, next) => {
-    const user = basicAuthModule(req);
-    if (!user || user.name !== process.env.AUTH_NAME || user.pass !== process.env.AUTH_PASS) {
-      res.set('WWW-Authenticate', 'Basic realm=Authorization Required');
-      res.sendStatus(401);
-    } else {
-      next();
-    }
-  };
-}
+const { basicAuth } = require('../../middlewares');
 
 module.exports = (router) => {
   const docTitle = process.env.SWAGGER_TITLE;

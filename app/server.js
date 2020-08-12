@@ -8,6 +8,7 @@ const cors = require('cors');
 const helmet = require('helmet');
 const bodyParser = require('body-parser');
 const xss = require('xss-clean');
+
 const {
   notFound,
   reqId,
@@ -22,7 +23,7 @@ app.use(expressValidator());
 
 app.use(cookieParser());
 app.use(cors());
-app.use(helmet.hidePoweredBy({ setTo: 'PHP/5.4.0' }));
+app.use(helmet.hidePoweredBy({ setTo: 'PHP/7.47.0' }));
 app.use(compress());
 app.use(bodyParser.json({ limit: '10kb' }));
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -30,9 +31,6 @@ app.use(xss());
 app.use(limit);
 app.use(reqId);
 app.use(requestLog);
-
-// Logger
-app.set('etag', false);
 
 // Routing
 app.use('/', enrouten({ directory: 'routes' }));
@@ -45,7 +43,7 @@ app.use((err, req, res) => {
 });
 
 // eslint-disable-next-line no-console
-app.listen(port, () => console.log(`App listening on port ${port}`));
+app.listen(port, () => console.log(`App listening on port ${port}`)).setTimeout(130000);
 
 
 module.exports = app;

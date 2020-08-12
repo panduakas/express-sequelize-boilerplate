@@ -8,29 +8,32 @@ const requestLog = (req, res, next) => {
     query,
     params,
     body,
-    requestId,
+    ip,
+    headers,
   } = req;
 
   const data = {
     query,
     params,
     body,
+    headers,
+    ip,
   };
+
+  delete data.headers.authorization;
 
   if (Object.entries(query).length === 0 && query.constructor === Object) delete data.query;
   if (Object.entries(params).length === 0 && params.constructor === Object) delete data.params;
   if (Object.entries(body).length === 0 && body.constructor === Object) delete data.body;
 
   logInfo({
-    requestId,
     data,
     method,
-    description: `REQUEST TO: ${baseUrl || originalUrl}`,
+    message: `REQUEST TO: ${baseUrl || originalUrl}`,
     mep: 'REQUEST',
   });
-  res.requestId = requestId;
-  res.method = method;
 
+  res.method = method;
   next();
 };
 

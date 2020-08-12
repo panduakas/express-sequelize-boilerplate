@@ -3,7 +3,7 @@ const supertest = require('supertest');
 const { assert } = require('chai');
 const cuid = require('cuid');
 const app = require('../app/server');
-const { sequelize } = require('../app/db/models');
+const { sequelize } = require('../app/db/models/Mysql');
 const { AESDecrypt } = require('../app/libs');
 
 const server = supertest(app);
@@ -21,7 +21,6 @@ before((done) => {
 
 require('./ping.test')(server, assert, dataTest, sequelize, AESDecrypt);
 require('./libs/encryption.test')(server, assert);
-
 
 after((done) => {
   // TODO: Delete Seed Data

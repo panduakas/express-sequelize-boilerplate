@@ -6,10 +6,10 @@ const isNull = require('lodash/isNull');
 const get = require('lodash/get');
 const { logInfo, logError } = require('./logger');
 const { httpStatus } = require('./codes');
-// const { AESEncrypt } = require('../libs');
+const { AESEncrypt } = require('../libs');
 
-const successResponse = (req, data) => {
-  const { requestId, method } = req;
+const successResponse = (res, data) => {
+  const { method, statusCode } = res;
   const payload = {
     status: get(data, 'status') || httpStatus.ok,
     success: true,
@@ -18,36 +18,40 @@ const successResponse = (req, data) => {
   };
 
   logInfo({
-    requestId,
-    data: payload.data,
     method,
-    description: payload.message,
+    statusCode,
+    ...payload,
     mep: 'RESPONSE',
   });
 
-  return payload;
-  // return AESEncrypt(payload);
+  let result = payload;
+  if (process.env.NODE_ENV === 'production') result = AESEncrypt(payload);
+
+  return result;
 };
 
-const errorResponse = (req, e) => {
-  const { requestId, method } = req;
+const errorResponse = (res, e) => {
+  const { method, statusCode } = res;
   const payload = {
     status: get(e, 'status') || httpStatus.badRequest,
     success: false,
-    message: (e.error && e.error.message) || get(e, 'message'),
+    message: (get(e, 'error') && get(e.error, 'message'))
+    || (get(e, 'message') && get(e.original, 'code'))
+    || get(e, 'message'),
     data: get(e, 'data') || null,
   };
 
   logError({
-    requestId,
-    data: payload.data,
     method,
-    description: payload.message,
+    statusCode,
+    ...payload,
     mep: 'RESPONSE',
   });
 
-  return payload;
-  // return AESEncrypt(payload);
+  let result = payload;
+  if (process.env.NODE_ENV === 'production') result = AESEncrypt(payload);
+
+  return result;
 };
 
 const paging = (page = 1, limit = 10) => {
