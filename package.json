@@ -1,7 +1,7 @@
 {
-  "name": "core-mpng3",
+  "name": "express-sequelize-boilerplate",
   "version": "1.0.0",
-  "description": "Core services mpng3",
+  "description": "Express Sequelize Boilerplate",
   "main": ".eslintrc.js",
   "scripts": {
     "start": "node ./app/server.js",
@@ -21,7 +21,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@bitbucket.org/BersamaZipay/core-mpng3.git"
+    "url": "git+https://github.com/panduakas/express-sequelize-boilerplate.git"
   },
   "dependencies": {
     "axios": "^0.19.2",
@@ -86,5 +86,8 @@
   },
   "author": "",
   "license": "ISC",
-  "homepage": "https://bitbucket.org/BersamaZipay/core-mpng3#readme"
+  "bugs": {
+    "url": "https://github.com/panduakas/express-sequelize-boilerplate/issues"
+  },
+  "homepage": "https://github.com/panduakas/express-sequelize-boilerplate#readme"
 }
