@@ -1,4 +1,5 @@
 const cuid = require('cuid');
+const { AsyncLocalStorage } = require('async_hooks');
 const { errorResponse, httpStatus } = require('../helpers');
 
 const notFound = (req, res) => {
@@ -19,8 +20,19 @@ const reqId = (req, res, next) => {
 
 const errorHandler = (err, req, res) => errorResponse(res, err);
 
+
+const asyncLocalStorage = new AsyncLocalStorage();
+const requestIdMiddleware = (req, res, next) => {
+  asyncLocalStorage.run(new Map(), () => {
+    asyncLocalStorage.getStore().set('requestId', cuid());
+    next();
+  });
+};
+
 module.exports = {
   notFound,
   reqId,
   errorHandler,
+  requestIdMiddleware,
+  asyncLocalStorage,
 };

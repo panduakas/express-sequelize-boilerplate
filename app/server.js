@@ -14,6 +14,7 @@ const {
   reqId,
   requestLog,
   limit,
+  requestIdMiddleware,
 } = require('./middlewares');
 
 const app = express();
@@ -31,6 +32,7 @@ app.use(xss());
 app.use(limit);
 app.use(reqId);
 app.use(requestLog);
+app.use(requestIdMiddleware);
 
 // Routing
 app.use('/', enrouten({ directory: 'routes' }));
