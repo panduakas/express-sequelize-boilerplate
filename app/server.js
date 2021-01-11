@@ -48,6 +48,7 @@ app.use(expressValidator());
 
 app.use(cookieParser());
 app.use(cors());
+app.use(helmet());
 app.use(helmet.hidePoweredBy({ setTo: 'PHP/7.47.0' }));
 app.use(compress());
 app.use(bodyParser.json({ limit: '10kb' }));
