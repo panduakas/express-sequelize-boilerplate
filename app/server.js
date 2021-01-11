@@ -8,6 +8,8 @@ const cors = require('cors');
 const helmet = require('helmet');
 const bodyParser = require('body-parser');
 const xss = require('xss-clean');
+const session = require('express-session');
+const MemoryStore = require('memorystore')(session);
 
 const {
   notFound,
@@ -19,6 +21,16 @@ const {
 
 const app = express();
 const port = process.env.PORT;
+
+app.use(session({
+  cookie: { maxAge: 86400000 },
+  store: new MemoryStore({
+    checkPeriod: 86400000, // prune expired entries every 24h
+  }),
+  resave: false,
+  secret: 'ampunb4ngjag0',
+  saveUninitialized: false,
+}));
 
 app.use(expressValidator());
 
