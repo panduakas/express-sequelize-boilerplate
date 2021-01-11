@@ -10,6 +10,8 @@ const bodyParser = require('body-parser');
 const xss = require('xss-clean');
 const session = require('express-session');
 const MemoryStore = require('memorystore')(session);
+// const RedisStore = require('connect-redis')(session);
+// const redisClient = require('redis').createClient(process.env.REDIS_URL);
 
 const {
   notFound,
@@ -22,11 +24,21 @@ const {
 const app = express();
 const port = process.env.PORT;
 
+// const redisOptions = {
+//   client: redisClient,
+//   no_ready_check: true,
+//   ttl: 600,
+//   logErrors: true,
+// };
+
+// const redisSessionStore = new RedisStore(redisOptions);
+
 app.use(session({
   cookie: { maxAge: 86400000 },
   store: new MemoryStore({
     checkPeriod: 86400000, // prune expired entries every 24h
   }),
+  // store: redisSessionStore,
   resave: false,
   secret: 'ampunb4ngjag0',
   saveUninitialized: false,
