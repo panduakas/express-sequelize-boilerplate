@@ -1,4 +1,5 @@
 require('dotenv').config();
+const get = require('lodash/get');
 const express = require('express');
 const enrouten = require('express-enrouten');
 const expressValidator = require('express-validator');
@@ -19,7 +20,13 @@ const {
   requestLog,
   limit,
   requestIdMiddleware,
+  syntaxErrorHandler,
+  unauthorizedErrorHandler,
 } = require('./middlewares');
+const {
+  httpStatus,
+  errorResponse,
+} = require('./helpers');
 
 const app = express();
 const port = process.env.PORT;
@@ -53,6 +60,7 @@ app.use(helmet.hidePoweredBy({ setTo: 'PHP/7.47.0' }));
 app.use(compress());
 app.use(bodyParser.json({ limit: '10kb' }));
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(syntaxErrorHandler);
 app.use(xss());
 app.use(limit);
 app.use(reqId);
@@ -61,13 +69,12 @@ app.use(requestIdMiddleware);
 
 // Routing
 app.use('/', enrouten({ directory: 'routes' }));
+app.use(unauthorizedErrorHandler);
 
 // Not Found handler
 app.use('*', notFound);
 
-app.use((err, req, res) => {
-  res.status(500).json(err);
-});
+app.use((err, req, res) => res.status(get(err, 'status') || get(res, 'statusCode') || httpStatus.badRequest).json(errorResponse(res, err)));
 
 // eslint-disable-next-line no-console
 app.listen(port, () => console.log(`App listening on port ${port}`)).setTimeout(130000);

@@ -9,47 +9,55 @@
     * NodeJS as server runner
     * Express as server framework
     * Sequelize as database ORM
+    * Redis as server memory store
+    * Logstash as logging server (optional)
 
 ## Getting Started
 
 Getting up and running is as easy as 1, 2, 3.
 
-1. Make sure you have [NodeJS](https://nodejs.org/) and [npm](https://www.npmjs.com/) installed.
-    Required version:
+1. Make sure you have [NodeJS](https://nodejs.org/), [npm](https://www.npmjs.com/) and [redis](https://redis.io/) installed.
+   Required version:
 
-    > "node": ">= 8.10.0"
+   > "node": ">= 8.10.0"
 
 2. Install your dependencies
 
-    > cd path/to/app; npm install
+   > cd path/to/app; npm install
 
 3. Configure things
 
-    **`Create .env file in root directory of the project`**
+   **`Create .env file in root directory of the project`**
 
-    Copy .env.example file to new file named as .env then setup variable value following your machine.
+   Copy .env.example file to new file named as .env then setup variable value following your machine.
 
 4. Start your app
 
-    > npm run start-dev
+   > npm run start-dev
 
 5. Unit Test
 
-    > npm run test
+   > npm run test
 
 6. Swagger Docs
 
-    > `localhost:3000/docs`
-    > username: `dev`
-    > password: `supersecretpassword`
+   > `localhost:3000/docs`
+   > username: `dev`
+   > password: `supersecretpassword`
 
 7. Docker
 
-    > docker-compose build
+   > docker-compose build
 
-    **then**
+   **then**
 
-    > docker-compose up
+   > docker-compose up
+
+## If you are not using logstash
+
+Comments logstash transports code, please check this file:
+
+> app/helpers/logger.js
 
 ## License
 

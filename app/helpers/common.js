@@ -8,7 +8,7 @@ const { logInfo, logError } = require('./logger');
 const { httpStatus } = require('./codes');
 const { AESEncrypt } = require('../libs');
 
-const successResponse = (res, data) => {
+const successResponse = async (res, data) => {
   const { method, statusCode } = res;
   const payload = {
     status: get(data, 'status') || httpStatus.ok,
@@ -17,12 +17,14 @@ const successResponse = (res, data) => {
     data: get(data, 'data') || data,
   };
 
-  logInfo({
+  const payloadLog = {
     method,
     statusCode,
-    ...payload,
+    payload,
     mep: 'RESPONSE',
-  });
+  };
+
+  await logInfo(payloadLog);
 
   let result = payload;
   if (process.env.NODE_ENV === 'production') result = AESEncrypt(payload);
@@ -30,7 +32,7 @@ const successResponse = (res, data) => {
   return result;
 };
 
-const errorResponse = (res, e) => {
+const errorResponse = async (res, e) => {
   const { method, statusCode } = res;
   const payload = {
     status: get(e, 'status') || httpStatus.badRequest,
@@ -41,10 +43,10 @@ const errorResponse = (res, e) => {
     data: get(e, 'data') || null,
   };
 
-  logError({
+  await logError({
     method,
     statusCode,
-    ...payload,
+    payload,
     mep: 'RESPONSE',
   });
 

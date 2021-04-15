@@ -3,11 +3,11 @@ const { successResponse, errorResponse } = require('./common');
 const { httpStatus } = require('./codes');
 
 module.exports = fn => (req, res) => fn(req, res)
-  .then(result => res
+  .then(async result => res
     .status(get(result, 'status') || httpStatus.ok)
-    .json(successResponse(res, result))
+    .json(await successResponse(res, result))
     .end())
-  .catch(error => res
+  .catch(async error => res
     .status(get(error, 'status') || httpStatus.badRequest)
-    .json(errorResponse(res, error))
+    .json(await errorResponse(res, error))
     .end());
